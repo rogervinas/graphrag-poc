@@ -1,5 +1,4 @@
-name: Makefile Tests
-
+name: CI
 on:
   push:
     branches: [ main ]
