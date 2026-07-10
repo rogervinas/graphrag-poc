@@ -1,4 +1,4 @@
-# GraphRAG vs. Standard RAG
+# Standard RAG vs. GraphRAG
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".img/rag_vs_graphrag_dark.jpg">
