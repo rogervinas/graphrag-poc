@@ -1,0 +1,4 @@
+OFFICE ROUTING RECORD ID: TRK-2026-158
+CORE ENTITY PRINCIPAL: Megan
+RECEIVING TARGET PRINCIPAL: Michael
+ACTION ROUTING LOG: Internal workflow tracking shows Megan transferred the security key token designated for managing the blue marketing folder directly to Michael to complete routine weekly operational admin tasks.

@@ -12,3 +12,8 @@ wheels/
 # Project
 .env
 .idea
+
+# GraphRAG
+cache/
+logs/
+output/
