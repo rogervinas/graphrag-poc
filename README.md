@@ -1,6 +1,6 @@
 # GraphRAG vs. Standard RAG
 
-![rag_vs_graphrag.png](.img/rag_vs_graphrag.png)
+<img alt="RAG vs. GraphRAG" src=".img/rag_vs_graphrag.png" width="300">
 
 This repository contains a performance benchmark comparing **Standard RAG (Vector Search)** against **GraphRAG (Knowledge Graph)**. The objective is to demonstrate how standard vector retrieval models break down when facing multi-hop relational dependencies embedded within high-density noise, while GraphRAG resolves the structural pathways deterministically.
 
