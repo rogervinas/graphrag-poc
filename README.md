@@ -12,7 +12,7 @@ This benchmark uses an **Asset Lineage (Provenance Chain)** tracking environment
 
 The asset's true journey is split across three separate, highly structured operational data-logs:
 
-$$\text{Arthur (System Engineer)} \xrightarrow{\text{SEC-2026-001}} \text{Beatrice (Validator)} \xrightarrow{\text{SEC-2026-002}} \text{Charlie (Operator)} \xrightarrow{\text{SEC-2026-003}} \text{Diana (DBA)}$$
+$$\text{Arthur (System Engineer)} \xrightarrow{\text{001}} \text{Beatrice (Validator)} \xrightarrow{\text{002}} \text{Charlie (Operator)} \xrightarrow{\text{003}} \text{Diana (DBA)}$$
 
 * **File 1 ([`input_001.txt`](input/input_001.txt)):** Arthur generates a high-clearance security key token and transfers it to Beatrice.
 * **File 2 ([`input_002.txt`](input/input_002.txt)):** Beatrice validates the security key token and forwards it to Charlie.
@@ -81,9 +81,9 @@ make query-local QUERY="Identify the original creator of the security key token 
 
 ### 🏳️ Standard RAG Defeat
 
-Standard RAG searches purely via surface-level cosine similarity. Because every background file contains the term "security key token," it cannot use those words to filter out data. The query forces it to anchor on "Diana's database cluster," successfully pulling `intel_03.txt` (Charlie $\rightarrow$ Diana) and the 4 target decoy baits.
+Standard RAG searches purely via surface-level cosine similarity. Because every background file contains the term "security key token," it cannot use those words to filter out data. The query forces it to anchor on "Diana's database cluster," successfully pulling [`input_003.txt`](input/input_003.txt) (Charlie $\rightarrow$ Diana) and the 4 target decoy baits.
 
-However, `intel_01.txt` (Arthur $\rightarrow$ Beatrice) has **zero semantic correlation** to Diana. It gets pushed completely out of the Top-K retrieval window. Standard RAG stops at the terminal end of the chain, failing the multi-hop requirements entirely and explicitly concluding:
+However, [`input_001.txt`](input/input_001.txt) (Arthur $\rightarrow$ Beatrice) has **zero semantic correlation** to Diana. It gets pushed completely out of the Top-K retrieval window. Standard RAG stops at the terminal end of the chain, failing the multi-hop requirements entirely and explicitly concluding:
 
 > *"The available data tables do not contain sufficient information to identify the original creator... the source or creator of that specific token is not documented in the provided logs."*
 
@@ -91,7 +91,7 @@ Check the complete [RAG result here](results/result-rag.md)
 
 ### 🏆 GraphRAG Victory
 
-GraphRAG completely bypasses the keyword trap. During indexation, its entity extraction pipeline maps the structured components into explicit graph edges. At query execution, the engine roots into the **Diana** node, discovers the inbound relationship from **Charlie** (`SEC-2026-003`), hops backward to **Beatrice** (`SEC-2026-002`), and traces the operational lineage directly back to **Arthur** (`SEC-2026-001`). It isolates the signal completely, returning a flawless audit summary with zero noise leakage.
+GraphRAG completely bypasses the keyword trap. During indexation, its entity extraction pipeline maps the structured components into explicit graph edges. At query execution, the engine roots into the **Diana** node, discovers the inbound relationship from **Charlie** ([`input_003.txt`](input/input_003.txt)), hops backward to **Beatrice** ([`input_002.txt`](input/input_002.txt)), and traces the operational lineage directly back to **Arthur** ([`input_001.txt`](input/input_001.txt)). It isolates the signal completely, returning a flawless audit summary with zero noise leakage.
 
 Check the complete [GraphRAG result here](results/result-graphrag.md)
 
