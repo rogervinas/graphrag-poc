@@ -40,7 +40,8 @@ Standard vector search engines easily solve multi-hop questions if the target ph
 ### The Target Query
 
 ```text
-Identify the original creator of the security key token that was ultimately uploaded into Diana's database cluster.
+Identify the original creator of the security key token
+that was ultimately uploaded into Diana's database cluster
 ```
 
 ## ⚙️ Project Setup
