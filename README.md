@@ -1,8 +1,15 @@
-# GraphRAG vs. Standard RAG: Deterministic Multi-Hop Lineage
+# GraphRAG vs. Standard RAG
 
-![rag_vs_graphrag.png](.img/rag_vs_graphrag.png)
+<img alt="RAG vs. GraphRAG" src=".img/rag_vs_graphrag.png" width="300">
 
 This repository contains a performance benchmark comparing **Standard RAG (Vector Search)** against **GraphRAG (Knowledge Graph)**. The objective is to demonstrate how standard vector retrieval models break down when facing multi-hop relational dependencies embedded within high-density noise, while GraphRAG resolves the structural pathways deterministically.
+
+- [🗺️ The PoC Scenario: Digital Chain of Custody](#-the-poc-scenario-digital-chain-of-custody)
+- [🪤 The Adversarial Blind-Spot Strategy](#-the-adversarial-blind-spot-strategy)
+- [⚙️ Project Setup](#%EF%B8%8F-project-setup)
+- [🚀 Execution](#-execution)
+- [🔬 Post-Mortem & Core Findings](#-post-mortem--core-findings)
+- [📊 Strategic Evaluation Matrix](#-strategic-evaluation-matrix)
 
 ## 🗺️ The PoC Scenario: Digital Chain of Custody
 
@@ -12,7 +19,7 @@ This benchmark uses an **Asset Lineage (Provenance Chain)** tracking environment
 
 The asset's true journey is split across three separate, highly structured operational data-logs:
 
-$$\text{Arthur (System Engineer)} \xrightarrow{\text{SEC-2026-001}} \text{Beatrice (Validator)} \xrightarrow{\text{SEC-2026-002}} \text{Charlie (Operator)} \xrightarrow{\text{SEC-2026-003}} \text{Diana (DBA)}$$
+$$\text{Arthur (System Engineer)} \xrightarrow{\text{001}} \text{Beatrice (Validator)} \xrightarrow{\text{002}} \text{Charlie (Operator)} \xrightarrow{\text{003}} \text{Diana (DBA)}$$
 
 * **File 1 ([`input_001.txt`](input/input_001.txt)):** Arthur generates a high-clearance security key token and transfers it to Beatrice.
 * **File 2 ([`input_002.txt`](input/input_002.txt)):** Beatrice validates the security key token and forwards it to Charlie.
@@ -50,9 +57,15 @@ chunking:
   encoding_model: o200k_base
 ```
 
+Set your model provider in [`settings.yaml`](settings.yaml) under `completion_models` and `embedding_models`. This PoC was executed using **gemini**.
+
+Also, if required, copy [`.env.example`](.env.example) to `.env` and provide your model provider API key under `GRAPHRAG_API_KEY`.
+
+More information about GraphRAG configuration at [microsoft.github.io/graphrag/config/yaml](https://microsoft.github.io/graphrag/config/yaml/).
+
 Run `make` to see all available commands.
 
-## 🐍 Execution
+## 🚀 Execution
 
 The environment is built procedurally using an automated script to format both signal files and background noise identically. This ensures that GraphRAG treats all source text with equal extraction priority during indexation.
 
@@ -79,19 +92,19 @@ make query-local QUERY="Identify the original creator of the security key token 
 
 ## 🔬 Post-Mortem & Core Findings
 
-### 📉 Standard RAG Defeat
+### 🏳️ Standard RAG Defeat
 
-Standard RAG searches purely via surface-level cosine similarity. Because every background file contains the term "security key token," it cannot use those words to filter out data. The query forces it to anchor on "Diana's database cluster," successfully pulling `intel_03.txt` (Charlie $\rightarrow$ Diana) and the 4 target decoy baits.
+Standard RAG searches purely via surface-level cosine similarity. Because every background file contains the term "security key token," it cannot use those words to filter out data. The query forces it to anchor on "Diana's database cluster," successfully pulling [`input_003.txt`](input/input_003.txt) (Charlie $\rightarrow$ Diana) and the 4 target decoy baits.
 
-However, `intel_01.txt` (Arthur $\rightarrow$ Beatrice) has **zero semantic correlation** to Diana. It gets pushed completely out of the Top-K retrieval window. Standard RAG stops at the terminal end of the chain, failing the multi-hop requirements entirely and explicitly concluding:
+However, [`input_001.txt`](input/input_001.txt) (Arthur $\rightarrow$ Beatrice) has **zero semantic correlation** to Diana. It gets pushed completely out of the Top-K retrieval window. Standard RAG stops at the terminal end of the chain, failing the multi-hop requirements entirely and explicitly concluding:
 
 > *"The available data tables do not contain sufficient information to identify the original creator... the source or creator of that specific token is not documented in the provided logs."*
 
 Check the complete [RAG result here](results/result-rag.md)
 
-### 🔍 GraphRAG Victory
+### 🏆 GraphRAG Victory
 
-GraphRAG completely bypasses the keyword trap. During indexation, its entity extraction pipeline maps the structured components into explicit graph edges. At query execution, the engine roots into the **Diana** node, discovers the inbound relationship from **Charlie** (`SEC-2026-003`), hops backward to **Beatrice** (`SEC-2026-002`), and traces the operational lineage directly back to **Arthur** (`SEC-2026-001`). It isolates the signal completely, returning a flawless audit summary with zero noise leakage.
+GraphRAG completely bypasses the keyword trap. During indexation, its entity extraction pipeline maps the structured components into explicit graph edges. At query execution, the engine roots into the **Diana** node, discovers the inbound relationship from **Charlie** ([`input_003.txt`](input/input_003.txt)), hops backward to **Beatrice** ([`input_002.txt`](input/input_002.txt)), and traces the operational lineage directly back to **Arthur** ([`input_001.txt`](input/input_001.txt)). It isolates the signal completely, returning a flawless audit summary with zero noise leakage.
 
 Check the complete [GraphRAG result here](results/result-graphrag.md)
 
