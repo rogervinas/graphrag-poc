@@ -4,6 +4,13 @@
 
 This repository contains a performance benchmark comparing **Standard RAG (Vector Search)** against **GraphRAG (Knowledge Graph)**. The objective is to demonstrate how standard vector retrieval models break down when facing multi-hop relational dependencies embedded within high-density noise, while GraphRAG resolves the structural pathways deterministically.
 
+- [The PoC Scenario: Digital Chain of Custody](#-the-poc-scenario-digital-chain-of-custody)
+- [The Adversarial Blind-Spot Strategy](#-the-adversarial-blind-spot-strategy)
+- [Project Setup](#-project-setup)
+- [Execution](#-execution)
+- [Post-Mortem & Core Findings](#-post-mortem--core-findings)
+- [Strategic Evaluation Matrix](#-strategic-evaluation-matrix)
+
 ## 🗺️ The PoC Scenario: Digital Chain of Custody
 
 This benchmark uses an **Asset Lineage (Provenance Chain)** tracking environment. A high-clearance security asset passes through several hands before deployment. The names of the origin person and the final destination target never appear in the same document.
@@ -54,7 +61,7 @@ Set your model provider in [`settings.yaml`](settings.yaml) under `completion_mo
 
 Also, if required, copy [`.env.example`](.env.example) to `.env` and provide your model provider API key under `GRAPHRAG_API_KEY`.
 
-More information about GraphRAG configuration at https://microsoft.github.io/graphrag/config/yaml/.
+More information about GraphRAG configuration at [microsoft.github.io/graphrag/config/yaml](https://microsoft.github.io/graphrag/config/yaml/).
 
 Run `make` to see all available commands.
 
