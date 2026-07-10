@@ -6,7 +6,7 @@ This repository contains a performance benchmark comparing **Standard RAG (Vecto
 
 - [🗺️ The PoC Scenario: Digital Chain of Custody](#-the-poc-scenario-digital-chain-of-custody)
 - [🪤 The Adversarial Blind-Spot Strategy](#-the-adversarial-blind-spot-strategy)
-- [⚙️ Project Setup](#--project-setup)
+- [⚙️ Project Setup](#%EF%B8%8F-project-setup)
 - [🚀 Execution](#-execution)
 - [🔬 Post-Mortem & Core Findings](#-post-mortem--core-findings)
 - [📊 Strategic Evaluation Matrix](#-strategic-evaluation-matrix)
