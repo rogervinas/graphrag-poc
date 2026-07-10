@@ -90,8 +90,13 @@ make index
 
 ### Step 3: Run the Queries
 
+Standard RAG:
 ```shell
 make query-basic QUERY="Identify the original creator of the security key token that was ultimately uploaded into Diana's database cluster"
+```
+
+GraphRAG:
+```shell
 make query-local QUERY="Identify the original creator of the security key token that was ultimately uploaded into Diana's database cluster"
 ```
 
