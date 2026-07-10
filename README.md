@@ -4,12 +4,12 @@
 
 This repository contains a performance benchmark comparing **Standard RAG (Vector Search)** against **GraphRAG (Knowledge Graph)**. The objective is to demonstrate how standard vector retrieval models break down when facing multi-hop relational dependencies embedded within high-density noise, while GraphRAG resolves the structural pathways deterministically.
 
-- [The PoC Scenario: Digital Chain of Custody](#-the-poc-scenario-digital-chain-of-custody)
-- [The Adversarial Blind-Spot Strategy](#-the-adversarial-blind-spot-strategy)
-- [Project Setup](#-project-setup)
-- [Execution](#-execution)
-- [Post-Mortem & Core Findings](#-post-mortem--core-findings)
-- [Strategic Evaluation Matrix](#-strategic-evaluation-matrix)
+- [🗺️ The PoC Scenario: Digital Chain of Custody](#-the-poc-scenario-digital-chain-of-custody)
+- [🪤 The Adversarial Blind-Spot Strategy](#-the-adversarial-blind-spot-strategy)
+- [️⚙️ Project Setup](#-project-setup)
+- [🚀 Execution](#-execution)
+- [🔬 Post-Mortem & Core Findings](#-post-mortem--core-findings)
+- [📊 Strategic Evaluation Matrix](#-strategic-evaluation-matrix)
 
 ## 🗺️ The PoC Scenario: Digital Chain of Custody
 
@@ -65,7 +65,7 @@ More information about GraphRAG configuration at [microsoft.github.io/graphrag/c
 
 Run `make` to see all available commands.
 
-## 🐍 Execution
+## 🚀 Execution
 
 The environment is built procedurally using an automated script to format both signal files and background noise identically. This ensures that GraphRAG treats all source text with equal extraction priority during indexation.
 
