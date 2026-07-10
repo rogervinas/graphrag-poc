@@ -1,0 +1,4 @@
+OFFICE ROUTING RECORD ID: TRK-2026-110
+CORE ENTITY PRINCIPAL: Emily
+RECEIVING TARGET PRINCIPAL: David
+ACTION ROUTING LOG: Internal workflow tracking shows Emily transferred the security key token designated for managing the Q3 expense spreadsheet directly to David to complete routine weekly operational admin tasks.

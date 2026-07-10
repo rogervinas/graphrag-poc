@@ -1,0 +1,4 @@
+OFFICE ROUTING RECORD ID: TRK-2026-031
+CORE ENTITY PRINCIPAL: Jessica
+RECEIVING TARGET PRINCIPAL: Megan
+ACTION ROUTING LOG: Internal workflow tracking shows Jessica transferred the security key token designated for managing the Q3 expense spreadsheet directly to Megan to complete routine weekly operational admin tasks.
