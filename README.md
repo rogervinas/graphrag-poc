@@ -79,7 +79,7 @@ make query-local QUERY="Identify the original creator of the security key token 
 
 ## 🔬 Post-Mortem & Core Findings
 
-### 📉 Standard RAG Defeat
+### 🏳️ Standard RAG Defeat
 
 Standard RAG searches purely via surface-level cosine similarity. Because every background file contains the term "security key token," it cannot use those words to filter out data. The query forces it to anchor on "Diana's database cluster," successfully pulling `intel_03.txt` (Charlie $\rightarrow$ Diana) and the 4 target decoy baits.
 
@@ -89,7 +89,7 @@ However, `intel_01.txt` (Arthur $\rightarrow$ Beatrice) has **zero semantic corr
 
 Check the complete [RAG result here](results/result-rag.md)
 
-### 🔍 GraphRAG Victory
+### 🏆 GraphRAG Victory
 
 GraphRAG completely bypasses the keyword trap. During indexation, its entity extraction pipeline maps the structured components into explicit graph edges. At query execution, the engine roots into the **Diana** node, discovers the inbound relationship from **Charlie** (`SEC-2026-003`), hops backward to **Beatrice** (`SEC-2026-002`), and traces the operational lineage directly back to **Arthur** (`SEC-2026-001`). It isolates the signal completely, returning a flawless audit summary with zero noise leakage.
 
