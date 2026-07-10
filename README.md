@@ -50,6 +50,12 @@ chunking:
   encoding_model: o200k_base
 ```
 
+Set your model provider in [`settings.yaml`](settings.yaml) under `completion_models` and `embedding_models`. This PoC was executed using **gemini**.
+
+Also, if required, copy `[`.env.example`](.env.example)` to `.env` and provide your model provider API key under `GRAPHRAG_API_KEY`.
+
+More information about GraphRAG configuration at https://microsoft.github.io/graphrag/config/yaml/.
+
 Run `make` to see all available commands.
 
 ## 🐍 Execution
